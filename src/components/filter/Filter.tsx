@@ -1,24 +1,36 @@
-// const ages = [15, 20, 68, 70, 2 , 22, 89, 33];
-//
-// const predicate = (age: number) => {
-//     return age > 90;
-// }
-//
-// const oldAges = [100];
-//
-// type CourseType = {
-//     title: string
-//     price: number
-// }
-//
-// const courses = [ {title: "css", price: 100},
-//     {title: "html", price: 200},
-//     {title: "JS", price: 1000}];
-//
-//
-// const CheapCourses = (course: CourseType) => {
-//     return course.price < 160;
-// }
-//
-// const CheapestCourses = [{ title: "css", price: 100 }]
-export {}
+import React, {useState} from "react";
+import {FilterValue} from "../../App";
+
+export type MoneyProps = {
+    currentMoney: Money[],
+    changeFilter: (filter: FilterValue) => void
+
+}
+export type Money = {
+    banknots: string,
+    value: number,
+    number: string
+}
+export const NewComponent = ({currentMoney, changeFilter}: MoneyProps) => {
+
+    const changeFilterMoney = (filter:FilterValue) => {
+        changeFilter(filter);
+
+    }
+
+    return (
+        <>
+            {currentMoney.map((objMoney, index)=> {
+                return (
+                    <li key={index}>
+                        <span>{objMoney.banknots}</span>
+                        <span>{objMoney.number}</span>
+                        <span>{objMoney.value}</span>
+                    </li>
+                )
+            })}
+            <button onClick={() =>changeFilterMoney('all')}>All </button>
+            <button onClick={()=>changeFilterMoney('ruble')}>Ruble</button>
+            <button onClick={() => changeFilterMoney('dollar')}>Dollar</button></>
+    )
+}
